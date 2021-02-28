@@ -9,11 +9,8 @@ class App extends React.Component {
   readServerVersion = async (term) => {
     const response = await coffeetime.get('/version');
 
-    const { major, minor, patch } = response.data;
-    const serverVersion = `${major}.${minor}.${patch}`;
-
     this.setState({
-      serverVersion: serverVersion,
+      serverVersion: response.data,
       clientVersion: "1.2.3"
     });
   };

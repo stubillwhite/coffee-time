@@ -16,6 +16,8 @@ import java.util.concurrent.Executors
 import scala.concurrent.ExecutionContext
 import scala.concurrent.ExecutionContext.global
 
+import elsevier.hackday.coffeetime.BuildInfo
+
 case class Version(major: Int, minor: Int, patch: Int)
 
 object Main extends IOApp {
@@ -23,11 +25,9 @@ object Main extends IOApp {
   private val blockingPool = Executors.newFixedThreadPool(4)
   private val blocker = Blocker.liftExecutorService(blockingPool)
 
-  private val version: Version = Version(1, 0, 0)
-
   private val applicationService = HttpRoutes.of[IO] {
     case GET -> Root / "api" / "version" => {
-      Ok(version.asJson)
+      Ok(BuildInfo.version.asJson)
     }
     case request @ GET -> "web" /: rest => {
       static(rest.toString(), blocker, request)

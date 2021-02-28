@@ -25,13 +25,6 @@ libraryDependencies ++= Seq(
   "org.http4s" %% "http4s-circe" % http4sVersion,
   "io.circe" %% "circe-generic" % circeVersion,
 
-  // AWS
-  "com.elsevier.recs" %% "recs-aws" % "1.0.161",
-
-  // RDBMS
-  "org.postgresql" % "postgresql" % "42.2.18",
-  "org.scalikejdbc" % "scalikejdbc_2.12" % "3.5.0",
-
   // JSON
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.11.0",
 
@@ -40,3 +33,29 @@ libraryDependencies ++= Seq(
   "org.mockito" %% "mockito-scala" % "1.14.8" % Test,
   "org.mockito" %% "mockito-scala-scalatest" % "1.14.8" % Test
 )
+
+enablePlugins(BuildInfoPlugin)
+
+buildInfoPackage := "elsevier.hackday.coffeetime"
+
+buildInfoKeys := Seq[BuildInfoKey](
+  version
+)
+
+enablePlugins(AssemblyPlugin)
+
+artifact in(Compile, assembly) := {
+  val assemblyArtifact = (artifact in(Compile, assembly)).value
+  assemblyArtifact.withClassifier(Some("assembly"))
+}
+
+addArtifact(artifact in(Compile, assembly), assembly)
+
+// WARNING: Only valid for JDK 8
+// Discard module-info.class files as they are unused in JDK 8
+assemblyMergeStrategy in assembly := {
+  case "module-info.class" => MergeStrategy.discard
+  case x =>
+    val oldStrategy = (assemblyMergeStrategy in assembly).value
+    oldStrategy(x)
+}

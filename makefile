@@ -52,3 +52,10 @@ server: client-artefacts ## Build the server
 		sbt assembly
 
 dist: client server ## Build the distribution
+
+# Server                            {{{2
+# ======================================
+
+run: dist ## Build and run the application
+	@java -jar server/target/scala-2.12/coffee-time-assembly-0.1.0-SNAPSHOT.jar
+
