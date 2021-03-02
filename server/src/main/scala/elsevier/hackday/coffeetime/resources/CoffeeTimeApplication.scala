@@ -43,12 +43,18 @@ object Main extends IOApp {
   def static(file: String, blocker: Blocker, request: Request[IO]) =
     StaticFile.fromResource(s"web/${file}", blocker, Some(request)).getOrElseF(NotFound())
 
-  def run(args: List[String]): IO[ExitCode] =
+  def run(args: List[String]): IO[ExitCode] = {
+    val systemPort = System.getProperty("http.port")
+    val port = if (systemPort == null) 8080 else Integer.parseInt(systemPort)
+    val host = if (systemPort == null) "localhost" else "0.0.0.0"
+
     BlazeServerBuilder[IO](global)
-      .bindHttp(8080, "localhost")
+//      .bindHttp(port, "localhost")
+      .bindHttp(sys.env("PORT").toInt, "0.0.0.0")
       .withHttpApp(CORS(applicationService))
       .serve
       .compile
       .drain
       .as(ExitCode.Success)
+  }
 }

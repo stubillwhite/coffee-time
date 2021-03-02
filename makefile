@@ -59,3 +59,9 @@ dist: client server ## Build the distribution
 run: dist ## Build and run the application
 	@java -jar server/target/scala-2.12/coffee-time-assembly-0.1.0-SNAPSHOT.jar
 
+# Deploy                            {{{2
+# ======================================
+
+deploy: dist ## Deploy the application
+	@cd server && \
+		sbt stage deployHeroku

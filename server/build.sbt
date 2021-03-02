@@ -34,6 +34,10 @@ libraryDependencies ++= Seq(
   "org.mockito" %% "mockito-scala-scalatest" % "1.14.8" % Test
 )
 
+enablePlugins(JavaAppPackaging)
+
+herokuAppName in Compile := "lit-oasis-11347"
+
 enablePlugins(BuildInfoPlugin)
 
 buildInfoPackage := "elsevier.hackday.coffeetime"
