@@ -4,10 +4,10 @@ const Version = ({ serverVersion, clientVersion }) => {
     return (
         <div>
             <div>
-                Server version {serverVersion}
+                Server: {serverVersion}
             </div>
             <div>
-                Client version {clientVersion}
+                Client: {clientVersion}
             </div>
         </div>
     );

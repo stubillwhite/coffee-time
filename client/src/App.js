@@ -9,9 +9,11 @@ class App extends React.Component {
   readServerVersion = async (term) => {
     const response = await coffeetime.get('/version');
 
+    const { version } = require('../package.json');
+
     this.setState({
       serverVersion: response.data,
-      clientVersion: "1.2.3"
+      clientVersion: version
     });
   };
 
@@ -33,9 +35,10 @@ class App extends React.Component {
             <h2>Fancy a coffee with someone new?</h2>
           </div>
           <div>
-            <div class="ui huge primary button">Let's go! <i class="right arrow icon"></i></div>
+            <div className="ui huge primary button">Let's go! <i className="right arrow icon"></i></div>
           </div>
         </div>
+        <Version serverVersion={this.state.serverVersion} clientVersion={this.state.clientVersion} />
       </div>
     );
   }

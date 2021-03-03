@@ -34,6 +34,7 @@ clean: ## Remove all artefacts
 client: ## Build the client
 	@echo 'Building client'
 	@cd client && \
+		npm version patch && \
 		npm run build
 
 # Server                            {{{2
