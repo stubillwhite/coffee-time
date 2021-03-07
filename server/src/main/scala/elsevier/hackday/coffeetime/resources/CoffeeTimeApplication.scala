@@ -8,10 +8,7 @@ import org.http4s.server.middleware._
 import java.util.concurrent.Executors
 import scala.concurrent.ExecutionContext.global
 
-case class Version(major: Int, minor: Int, patch: Int)
-
 object Main extends IOApp {
-
 
   def run(args: List[String]): IO[ExitCode] = {
     val portParameter = sys.env.getOrElse("PORT", null)
@@ -33,4 +30,4 @@ object Main extends IOApp {
       .drain
       .as(ExitCode.Success)
   }
-}
+} 
