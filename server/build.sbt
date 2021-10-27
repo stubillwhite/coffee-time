@@ -30,9 +30,6 @@ libraryDependencies ++= Seq(
   // JSON
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.11.0",
 
-  // Calendar
-    "org.mnode.ical4j" % "ical4j" % "3.0.21",
-
   // Testing
   "org.scalatest" %% "scalatest" % "3.1.0" % Test,
   "org.mockito" %% "mockito-scala" % "1.14.8" % Test,

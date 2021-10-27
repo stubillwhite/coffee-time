@@ -50,15 +50,16 @@ client-artefacts: client
 server: client-artefacts ## Build the server
 	@echo 'Building server'
 	@cd server && \
-		sbt assembly
+		sbt clean assembly
 
 dist: client server ## Build the distribution
 
 # Server                            {{{2
 # ======================================
 
-run: dist ## Build and run the application
-	@java -jar server/target/scala-2.12/coffee-time-assembly-0.1.0-SNAPSHOT.jar -DPORT=8080
+run: ## dist ## Build and run the application
+	@$(eval JARFILE := $(shell ls server/target/scala-2.12/*.jar))
+	@java -jar $(JARFILE) -DPORT=8080
 
 # Deploy                            {{{2
 # ======================================
