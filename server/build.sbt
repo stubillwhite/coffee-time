@@ -8,6 +8,8 @@ crossScalaVersions := Seq("2.12.10")
 
 parallelExecution in Test := false
 
+mainClass in assembly := Some("elsevier.hackday.coffeetime.resources.Main")
+
 val http4sVersion = "1.0-234-d1a2b53"
 val circeVersion = "0.13.0"
 
@@ -27,6 +29,9 @@ libraryDependencies ++= Seq(
 
   // JSON
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % "2.11.0",
+
+  // Calendar
+    "org.mnode.ical4j" % "ical4j" % "3.0.21",
 
   // Testing
   "org.scalatest" %% "scalatest" % "3.1.0" % Test,
